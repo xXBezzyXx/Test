@@ -219,9 +219,20 @@
     });
   }
 
+  function ensureLanguageButton() {
+    let btn = document.getElementById("fieldOpsLanguageToggle");
+    if (btn) return btn;
+
+    btn = document.createElement("button");
+    btn.id = "fieldOpsLanguageToggle";
+    btn.className = "fieldops-language-toggle";
+    btn.type = "button";
+    document.body.appendChild(btn);
+    return btn;
+  }
+
   function updateLanguageButton(lang) {
-    const btn = document.getElementById("fieldOpsLanguageToggle");
-    if (!btn) return;
+    const btn = ensureLanguageButton();
     btn.textContent = lang === "es" ? "English" : "Español";
     btn.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a Español");
   }
@@ -247,7 +258,7 @@
   }
 
   function initLanguageToggle() {
-    const btn = document.getElementById("fieldOpsLanguageToggle");
+    const btn = ensureLanguageButton();
     if (btn && !btn.dataset.ready) {
       btn.dataset.ready = "true";
       btn.addEventListener("click", () => {
